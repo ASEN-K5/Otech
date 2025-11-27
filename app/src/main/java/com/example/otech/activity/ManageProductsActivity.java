@@ -37,6 +37,15 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
     private MaterialButton btnFilter;
     private ChipGroup chipGroup;
     private LinearLayout emptyState;
+    
+    // Filter views
+    private LinearLayout layoutFilters;
+    private MaterialAutoCompleteTextView actvFilterCategory;
+    private MaterialAutoCompleteTextView actvFilterBrand;
+    private TextInputEditText etPriceMin;
+    private TextInputEditText etPriceMax;
+    private MaterialButton btnApplyFilter;
+
     private ProductAdapter adapter;
     private MockDataStore dataStore;
     private ArrayList<Product> allProducts;
@@ -65,6 +74,14 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
         chipGroup = findViewById(R.id.chipGroup);
         emptyState = findViewById(R.id.emptyState);
 
+        // Filter views
+        layoutFilters = findViewById(R.id.layoutFilters);
+        actvFilterCategory = findViewById(R.id.actvFilterCategory);
+        actvFilterBrand = findViewById(R.id.actvFilterBrand);
+        etPriceMin = findViewById(R.id.etPriceMin);
+        etPriceMax = findViewById(R.id.etPriceMax);
+        btnApplyFilter = findViewById(R.id.btnApplyFilter);
+
         toolbar.setNavigationOnClickListener(v -> finish());
     }
 
@@ -91,7 +108,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                filterProducts(s.toString(), currentFilter);
+                filterProducts();
             }
 
             @Override
@@ -110,24 +127,58 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
                     currentFilter = "lowstock";
                 }
             }
-            filterProducts(etSearch.getText().toString(), currentFilter);
+            filterProducts();
         });
 
-        btnFilter.setOnClickListener(v -> showSortOptions());
+        // Toggle filter panel
+        btnFilter.setOnClickListener(v -> {
+            if (layoutFilters.getVisibility() == View.VISIBLE) {
+                layoutFilters.setVisibility(View.GONE);
+            } else {
+                layoutFilters.setVisibility(View.VISIBLE);
+            }
+        });
+
+        // Setup Filter Spinners
+        String[] categories = {"Tất cả", "Văn phòng", "Gaming", "Mỏng nhẹ", "Sinh viên", "Cảm ứng", "Laptop AI", "Đồ hoạ – kỹ thuật", "MacBook CTO"};
+        ArrayAdapter<String> categoryAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, categories);
+        actvFilterCategory.setAdapter(categoryAdapter);
+        actvFilterCategory.setText("Tất cả", false);
+
+        String[] brands = {"Tất cả", "ASUS", "MSI", "Acer", "Dell", "HP", "Apple", "Lenovo", "LG", "Gigabyte", "Razer"};
+        ArrayAdapter<String> brandAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, brands);
+        actvFilterBrand.setAdapter(brandAdapter);
+        actvFilterBrand.setText("Tất cả", false);
+
+        // Apply Filter Button
+        btnApplyFilter.setOnClickListener(v -> filterProducts());
     }
 
-    private void filterProducts(String query, String filter) {
+    private void filterProducts() {
+        String query = etSearch.getText().toString();
         filteredProducts.clear();
+
+        String selectedCategory = actvFilterCategory.getText().toString();
+        String selectedBrand = actvFilterBrand.getText().toString();
+        String minPriceStr = etPriceMin.getText().toString();
+        String maxPriceStr = etPriceMax.getText().toString();
+
+        double minPrice = minPriceStr.isEmpty() ? 0 : Double.parseDouble(minPriceStr);
+        double maxPrice = maxPriceStr.isEmpty() ? Double.MAX_VALUE : Double.parseDouble(maxPriceStr);
 
         for (Product product : allProducts) {
             boolean matchesSearch = query.isEmpty() || 
                 product.getName().toLowerCase().contains(query.toLowerCase()) ||
                 product.getBrand().toLowerCase().contains(query.toLowerCase());
 
-            boolean matchesFilter = filter.equals("all") ||
-                (filter.equals("lowstock") && product.getStock() < 10);
+            boolean matchesFilter = currentFilter.equals("all") ||
+                (currentFilter.equals("lowstock") && product.getStock() < 10);
 
-            if (matchesSearch && matchesFilter) {
+            boolean matchesCategory = selectedCategory.equals("Tất cả") || product.getCategory().equals(selectedCategory);
+            boolean matchesBrand = selectedBrand.equals("Tất cả") || product.getBrand().equals(selectedBrand);
+            boolean matchesPrice = product.getPrice() >= minPrice && product.getPrice() <= maxPrice;
+
+            if (matchesSearch && matchesFilter && matchesCategory && matchesBrand && matchesPrice) {
                 filteredProducts.add(product);
             }
         }
@@ -172,6 +223,42 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
                     adapter.notifyDataSetChanged();
                 })
                 .show();
+    }
+
+    private void applyFilters() {
+        String query = etSearch.getText().toString();
+        String filter = currentFilter;
+
+        // Get filter values
+        String selectedCategory = actvFilterCategory.getText().toString().trim();
+        String selectedBrand = actvFilterBrand.getText().toString().trim();
+        String priceMinStr = etPriceMin.getText().toString().trim();
+        String priceMaxStr = etPriceMax.getText().toString().trim();
+
+        double priceMin = priceMinStr.isEmpty() ? 0 : Double.parseDouble(priceMinStr);
+        double priceMax = priceMaxStr.isEmpty() ? Double.MAX_VALUE : Double.parseDouble(priceMaxStr);
+
+        filteredProducts.clear();
+
+        for (Product product : allProducts) {
+            boolean matchesSearch = query.isEmpty() || 
+                product.getName().toLowerCase().contains(query.toLowerCase()) ||
+                product.getBrand().toLowerCase().contains(query.toLowerCase());
+
+            boolean matchesFilter = filter.equals("all") ||
+                (filter.equals("lowstock") && product.getStock() < 10);
+
+            boolean matchesCategory = selectedCategory.isEmpty() || product.getCategory().equalsIgnoreCase(selectedCategory);
+            boolean matchesBrand = selectedBrand.isEmpty() || product.getBrand().equalsIgnoreCase(selectedBrand);
+            boolean matchesPrice = product.getPrice() >= priceMin && product.getPrice() <= priceMax;
+
+            if (matchesSearch && matchesFilter && matchesCategory && matchesBrand && matchesPrice) {
+                filteredProducts.add(product);
+            }
+        }
+
+        adapter.notifyDataSetChanged();
+        updateEmptyState();
     }
 
     @Override
@@ -222,6 +309,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
         TextInputEditText etProductName = dialogView.findViewById(R.id.etProductName);
         MaterialAutoCompleteTextView actvBrand = dialogView.findViewById(R.id.actvBrand);
         MaterialAutoCompleteTextView actvCategory = dialogView.findViewById(R.id.actvCategory);
+        TextInputEditText etOldPrice = dialogView.findViewById(R.id.etOldPrice);
         TextInputEditText etPrice = dialogView.findViewById(R.id.etPrice);
         TextInputEditText etStock = dialogView.findViewById(R.id.etStock);
         TextInputEditText etDescription = dialogView.findViewById(R.id.etDescription);
@@ -249,6 +337,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
             etProductName.setText(existingProduct.getName());
             actvBrand.setText(existingProduct.getBrand(), false);
             actvCategory.setText(existingProduct.getCategory(), false);
+            etOldPrice.setText(String.valueOf(existingProduct.getOldPrice()));
             etPrice.setText(String.valueOf(existingProduct.getPrice()));
             etStock.setText(String.valueOf(existingProduct.getStock()));
             etDescription.setText(existingProduct.getDescription());
@@ -294,6 +383,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
             String name = etProductName.getText().toString().trim();
             String brand = actvBrand.getText().toString().trim();
             String category = actvCategory.getText().toString().trim();
+            String oldPriceStr = etOldPrice.getText().toString().trim();
             String priceStr = etPrice.getText().toString().trim();
             String stockStr = etStock.getText().toString().trim();
             String description = etDescription.getText().toString().trim();
@@ -306,6 +396,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
 
             try {
                 double price = Double.parseDouble(priceStr);
+                double oldPrice = oldPriceStr.isEmpty() ? price : Double.parseDouble(oldPriceStr);
                 int stock = Integer.parseInt(stockStr);
 
                 // Build specs string
@@ -331,6 +422,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
                     existingProduct.setBrand(brand);
                     existingProduct.setCategory(category);
                     existingProduct.setPrice(price);
+                    existingProduct.setOldPrice(oldPrice);
                     existingProduct.setStock(stock);
                     existingProduct.setDescription(description);
                     existingProduct.setSpecs(specs);
@@ -353,7 +445,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
                         "P" + System.currentTimeMillis(),
                         name,
                         price,
-                        price * 1.2, // oldPrice = price * 1.2
+                        oldPrice,
                         description,
                         imageUrl.isEmpty() ? "https://via.placeholder.com/400" : imageUrl,
                         brand,

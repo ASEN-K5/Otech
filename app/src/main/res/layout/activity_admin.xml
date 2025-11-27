@@ -4,23 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
     tools:context=".activity.AdminActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:elevation="4dp">
+        android:background="@color/white"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="@color/white"
             app:title="Admin Dashboard"
-            app:titleTextColor="@color/colorOnPrimary">
+            app:titleTextColor="@color/text_primary">
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnLogout"
@@ -29,9 +29,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:text="Đăng xuất"
-                android:textColor="@color/colorOnPrimary"
+                android:textColor="@color/colorPrimary"
                 app:icon="@android:drawable/ic_lock_power_off"
-                app:iconTint="@color/colorOnPrimary" />
+                app:iconTint="@color/colorPrimary" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -55,7 +55,7 @@
                 android:layout_marginBottom="16dp"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -118,7 +118,7 @@
                     android:layout_marginEnd="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -163,7 +163,7 @@
                     android:layout_marginStart="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -217,7 +217,7 @@
                     android:layout_marginEnd="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -262,7 +262,7 @@
                     android:layout_marginStart="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -326,7 +326,7 @@
                     android:layout_marginEnd="4dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -366,7 +366,7 @@
                     android:layout_marginEnd="4dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -405,7 +405,7 @@
                     android:layout_marginStart="4dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -456,7 +456,7 @@
                 android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -518,7 +518,7 @@
                 android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -580,7 +580,7 @@
                 android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">
@@ -642,7 +642,7 @@
                 android:layout_marginBottom="12dp"
                 app:cardBackgroundColor="@android:color/white"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
+                app:cardElevation="0dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground">

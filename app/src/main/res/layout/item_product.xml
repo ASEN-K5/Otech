@@ -3,11 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    style="@style/Widget.OTech.CardView"
     android:layout_margin="8dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardBackgroundColor="@android:color/white">
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:strokeWidth="1dp"
+    app:strokeColor="@color/divider_color">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -61,7 +64,7 @@
                 android:text="ASUS ROG Strix G16"
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:maxLines="2"
                 android:ellipsize="end" />
 
@@ -88,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:text="(4.5)"
                     android:textSize="12sp"
-                    android:textColor="@color/gray_medium"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginStart="4dp" />
             </LinearLayout>
 
@@ -99,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:text="Đã bán: 150"
                 android:textSize="11sp"
-                android:textColor="@color/gray_medium"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="2dp" />
 
             <!-- Price -->
@@ -137,7 +140,7 @@
                 android:layout_height="wrap_content"
                 android:text="42.990.000₫"
                 android:textSize="12sp"
-                android:textColor="@color/gray_medium"
+                android:textColor="@color/text_secondary"
                 android:layout_marginTop="2dp"
                 android:visibility="gone" />
 

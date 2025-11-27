@@ -69,7 +69,7 @@ public class WishlistActivity extends AppCompatActivity implements ProductAdapte
                 finish();
                 return true;
             } else if (itemId == R.id.nav_categories) {
-                startActivity(new Intent(this, CategoriesActivity.class));
+                startActivity(new Intent(this, FilterProductsActivity.class));
                 return true;
             } else if (itemId == R.id.nav_favorites) {
                 return true;

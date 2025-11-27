@@ -231,18 +231,38 @@ public class ProductDetailActivity extends AppCompatActivity {
     }
     
     private void loadReviews() {
-        ArrayList<Review> reviews = dataStore.getProductReviews(product.getId());
+        ArrayList<Review> allReviews = dataStore.getProductReviews(product.getId());
         
-        if (!reviews.isEmpty()) {
-            ReviewAdapter adapter = new ReviewAdapter(this, reviews);
+        if (!allReviews.isEmpty()) {
+            // Show only first 5 reviews initially
+            int maxReviews = Math.min(5, allReviews.size());
+            ArrayList<Review> displayedReviews = new ArrayList<>(allReviews.subList(0, maxReviews));
+            
+            ReviewAdapter adapter = new ReviewAdapter(this, displayedReviews);
             rvReviews.setAdapter(adapter);
             rvReviews.setVisibility(View.VISIBLE);
             
+            // Show "View More" button if there are more than 5 reviews
+            MaterialButton btnViewMore = findViewById(R.id.btnViewMoreReviews);
+            if (allReviews.size() > 5) {
+                btnViewMore.setVisibility(View.VISIBLE);
+                btnViewMore.setOnClickListener(v -> {
+                    // Show all reviews
+                    ReviewAdapter fullAdapter = new ReviewAdapter(this, allReviews);
+                    rvReviews.setAdapter(fullAdapter);
+                    btnViewMore.setVisibility(View.GONE);
+                });
+            } else {
+                btnViewMore.setVisibility(View.GONE);
+            }
+            
             tvAverageRating.setText(String.format("%.1f", product.getRating()));
             rbAverageRating.setRating(product.getRating());
-            tvTotalReviews.setText(reviews.size() + " đánh giá");
+            tvTotalReviews.setText(allReviews.size() + " đánh giá");
         } else {
             rvReviews.setVisibility(View.GONE);
+            MaterialButton btnViewMore = findViewById(R.id.btnViewMoreReviews);
+            btnViewMore.setVisibility(View.GONE);
             tvAverageRating.setText("Chưa có");
             rbAverageRating.setRating(0);
             tvTotalReviews.setText("Chưa có đánh giá");

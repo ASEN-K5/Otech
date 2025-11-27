@@ -1,5 +1,6 @@
 package com.example.otech.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -120,42 +121,16 @@ public class ManageOrdersActivity extends AppCompatActivity implements OrderAdap
 
     @Override
     public void onViewDetailsClick(Order order) {
-        showOrderDetailsDialog(order);
+        // Open AdminOrderDetailActivity for a better visual interface
+        Intent intent = new Intent(this, AdminOrderDetailActivity.class);
+        intent.putExtra(Constants.EXTRA_ORDER, order);
+        startActivity(intent);
     }
 
     @Override
     public void onCancelOrderClick(Order order) {
         // Admin can't cancel, but can change status
         showOrderStatusDialog(order);
-    }
-
-    private void showOrderDetailsDialog(Order order) {
-        StringBuilder message = new StringBuilder();
-        message.append("Mã đơn: #").append(order.getId().substring(0, 8)).append("\n\n");
-        message.append("Khách hàng: ").append(order.getUserId()).append("\n\n");
-        message.append("Sản phẩm:\n");
-
-        for (int i = 0; i < order.getItems().size(); i++) {
-            var item = order.getItems().get(i);
-            message.append(i + 1).append(". ")
-                    .append(item.getProduct().getName())
-                    .append(" x").append(item.getQuantity())
-                    .append("\n");
-        }
-
-        message.append("\nĐịa chỉ giao hàng:\n").append(order.getDeliveryAddress());
-        message.append("\n\nTrạng thái: ").append(getStatusText(order.getStatus()));
-
-        if (order.getCancelReason() != null && !order.getCancelReason().isEmpty()) {
-            message.append("\n\nLý do hủy: ").append(order.getCancelReason());
-        }
-
-        new AlertDialog.Builder(this)
-                .setTitle("Chi tiết đơn hàng")
-                .setMessage(message.toString())
-                .setPositiveButton("Cập nhật trạng thái", (dialog, which) -> showOrderStatusDialog(order))
-                .setNegativeButton("Đóng", null)
-                .show();
     }
 
     private void showOrderStatusDialog(Order order) {

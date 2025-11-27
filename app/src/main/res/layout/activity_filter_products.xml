@@ -4,24 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundColor"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <!-- Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/tech_gradient">
+        android:background="@color/white"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
+            android:background="@color/white"
             app:title="Bộ lọc sản phẩm"
-            app:titleTextColor="@color/white"
+            app:titleTextColor="@color/text_primary"
             app:navigationIcon="@drawable/ic_back"
-            app:navigationIconTint="@color/white" />
+            app:navigationIconTint="@color/text_primary" />
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Main Content: Sidebar + Filter Area -->
@@ -37,7 +38,7 @@
             android:layout_height="match_parent"
             android:layout_margin="8dp"
             app:cardCornerRadius="12dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvUsageCategories"
@@ -367,7 +368,7 @@
         android:orientation="horizontal"
         android:padding="16dp"
         android:background="@color/white"
-        android:elevation="4dp">
+        android:elevation="0dp">
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnReset"

@@ -203,14 +203,31 @@ public class CategoriesActivity extends AppCompatActivity implements ProductAdap
         for (Product product : allProducts) {
             boolean matches = true;
 
-            // Usage category filter (for now, just display all products when usage category is selected)
-            // In real app, you would match products with usage category based on specs/tags
+            // Usage category filter - match exactly with product category
             if (!selectedUsageCategory.isEmpty()) {
-                // Filter logic based on usage category
-                // For now, showing all products that match other criteria
+                // Map usage categories to product categories
+                String productCategory = product.getCategory();
+                
+                if (selectedUsageCategory.equals("Văn phòng") && !productCategory.equals("Văn phòng")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("Gaming") && !productCategory.equals("Gaming")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("Mỏng nhẹ") && !productCategory.equals("Mỏng nhẹ")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("Sinh viên") && !productCategory.equals("Sinh viên")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("Cảm ứng") && !productCategory.equals("Cảm ứng")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("Laptop AI") && !productCategory.equals("Laptop AI")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("Đồ họa - Kỹ thuật") && !productCategory.equals("Đồ họa- Kỹ thuật")) {
+                    matches = false;
+                } else if (selectedUsageCategory.equals("MacBook CTO") && !productCategory.equals("Macbook CTO")) {
+                    matches = false;
+                }
             }
             
-            // Category filter
+            // Category filter (additional category filter)
             if (!selectedCategory.isEmpty() && !product.getCategory().equals(selectedCategory)) {
                 matches = false;
             }

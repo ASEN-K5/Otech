@@ -6,23 +6,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundColor"
+    android:background="@color/white"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
-    <!-- Toolbar with Gradient -->
+    <!-- Toolbar -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:elevation="4dp"
-        android:background="@drawable/tech_gradient">
+        android:background="@color/white"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@android:color/transparent"
-            android:elevation="0dp">
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -37,7 +36,7 @@
                     android:text="OTech"
                     android:textSize="24sp"
                     android:textStyle="bold"
-                    android:textColor="@color/white"
+                    android:textColor="@color/colorPrimary"
                     android:fontFamily="sans-serif-medium" />
 
                 <ImageView
@@ -49,7 +48,7 @@
                     android:contentDescription="Filter"
                     android:clickable="true"
                     android:focusable="true"
-                    android:tint="@color/white"
+                    app:tint="@color/text_primary"
                     android:background="?attr/selectableItemBackgroundBorderless" />
 
                 <ImageView
@@ -61,7 +60,7 @@
                     android:contentDescription="Notifications"
                     android:clickable="true"
                     android:focusable="true"
-                    android:tint="@color/white"
+                    app:tint="@color/text_primary"
                     android:background="?attr/selectableItemBackgroundBorderless" />
             </LinearLayout>
 
@@ -87,8 +86,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginBottom="8dp"
-                app:cardCornerRadius="24dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider_color"
+                app:cardBackgroundColor="@color/white">
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/divider_color"
+                app:cardBackgroundColor="@color/white">
 
                 <LinearLayout
                     android:id="@+id/layoutSearch"
@@ -105,7 +110,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_search"
-                        android:tint="@color/gray_medium"
+                        app:tint="@color/text_secondary"
                         android:contentDescription="Search" />
 
                     <TextView
@@ -126,8 +131,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_margin="16dp"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="8dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/white">
 
                 <androidx.viewpager2.widget.ViewPager2
                     android:id="@+id/viewPagerBanner"
@@ -150,7 +157,7 @@
                     android:text="Danh mục"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="@color/black"
+                    android:textColor="@color/text_primary"
                     android:layout_marginBottom="12dp" />
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -184,7 +191,7 @@
                         android:text="Sản phẩm hot"
                         android:textSize="18sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black" />
+                        android:textColor="@color/text_primary" />
 
                     <TextView
                         android:id="@+id/tvViewAllHot"
@@ -216,8 +223,8 @@
         android:id="@+id/bottomNavigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:elevation="8dp"
+        style="@style/Widget.OTech.BottomNavigationView"
+        android:elevation="0dp"
         app:itemIconTint="@color/bottom_nav_color"
         app:itemTextColor="@color/bottom_nav_color"
         app:labelVisibilityMode="labeled"

@@ -70,11 +70,29 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Price -->
+        <!-- Old Price (Original Price) -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Giá bán (₫) *"
+            android:hint="Giá gốc (₫)"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
+            app:prefixText="₫ "
+            android:layout_marginBottom="12dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etOldPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLines="1" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Price (Selling Price) -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Giá khuyến mãi (₫) *"
             style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
             app:prefixText="₫ "
             android:layout_marginBottom="12dp">

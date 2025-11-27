@@ -10,8 +10,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="64dp"
         android:layout_height="64dp"
-        app:cardCornerRadius="32dp"
-        app:cardElevation="2dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/divider_color"
+        app:cardBackgroundColor="@color/white"
         android:layout_marginBottom="4dp">
 
         <ImageView
@@ -20,7 +23,7 @@
             android:layout_height="match_parent"
             android:padding="16dp"
             android:scaleType="fitCenter"
-            android:background="@color/gray_light"
+            android:background="@color/white"
             android:contentDescription="Category Icon" />
 
     </com.google.android.material.card.MaterialCardView>
@@ -31,7 +34,7 @@
         android:layout_height="wrap_content"
         android:text="Gaming"
         android:textSize="12sp"
-        android:textColor="@color/gray_dark"
+        android:textColor="@color/text_primary"
         android:maxLines="1"
         android:ellipsize="end"
         android:gravity="center" />

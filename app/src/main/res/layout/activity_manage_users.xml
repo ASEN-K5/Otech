@@ -3,21 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundColor"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        app:elevation="4dp">
+        android:background="@color/white"
+        app:elevation="0dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
-            app:titleTextColor="@color/colorOnPrimary" />
+            android:background="@color/white"
+            app:titleTextColor="@color/text_primary"
+            app:navigationIconTint="@color/text_primary" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -46,7 +47,7 @@
                     android:layout_marginEnd="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -83,7 +84,7 @@
                     android:layout_marginStart="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -128,7 +129,7 @@
                     android:layout_marginEnd="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -165,7 +166,7 @@
                     android:layout_marginStart="6dp"
                     app:cardBackgroundColor="@android:color/white"
                     app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"

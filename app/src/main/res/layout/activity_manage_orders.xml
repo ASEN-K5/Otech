@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/backgroundColor"
+    android:background="@color/white"
     android:fitsSystemWindows="true">
 
     <!-- Toolbar -->
@@ -13,11 +13,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary"
-        android:elevation="4dp"
+        android:background="@color/white"
         app:title="Quản lý đơn hàng"
-        app:titleTextColor="@color/white"
-        app:navigationIcon="@android:drawable/ic_menu_revert" />
+        app:titleTextColor="@color/text_primary"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="@color/text_primary" />
 
     <!-- Filter Chips -->
     <com.google.android.material.chip.ChipGroup
