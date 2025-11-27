@@ -342,9 +342,9 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
             etStock.setText(String.valueOf(existingProduct.getStock()));
             etDescription.setText(existingProduct.getDescription());
             
-            // Parse specs string: "CPU: xxx | RAM: xxx | Storage: xxx"
+            // Parse specs string: "CPU: xxx, RAM: xxx, Storage: xxx, GPU: xxx, Screen: xxx"
             if (existingProduct.getSpecs() != null && !existingProduct.getSpecs().isEmpty()) {
-                String[] specParts = existingProduct.getSpecs().split("\\|");
+                String[] specParts = existingProduct.getSpecs().split(",");
                 for (String part : specParts) {
                     String[] keyValue = part.trim().split(":", 2);
                     if (keyValue.length == 2) {
@@ -399,7 +399,7 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
                 double oldPrice = oldPriceStr.isEmpty() ? price : Double.parseDouble(oldPriceStr);
                 int stock = Integer.parseInt(stockStr);
 
-                // Build specs string
+                // Build specs string (format: "CPU: xxx, RAM: xxx, Storage: xxx, GPU: xxx, Screen: xxx")
                 StringBuilder specsBuilder = new StringBuilder();
                 String cpu = etCpu.getText().toString().trim();
                 String ram = etRam.getText().toString().trim();
@@ -407,13 +407,25 @@ public class ManageProductsActivity extends AppCompatActivity implements Product
                 String gpu = etGpu.getText().toString().trim();
                 String screen = etScreen.getText().toString().trim();
                 
-                if (!cpu.isEmpty()) specsBuilder.append("CPU: ").append(cpu).append(" | ");
-                if (!ram.isEmpty()) specsBuilder.append("RAM: ").append(ram).append(" | ");
-                if (!storage.isEmpty()) specsBuilder.append("Storage: ").append(storage).append(" | ");
-                if (!gpu.isEmpty()) specsBuilder.append("GPU: ").append(gpu).append(" | ");
-                if (!screen.isEmpty()) specsBuilder.append("Screen: ").append(screen);
+                if (!cpu.isEmpty()) specsBuilder.append("CPU: ").append(cpu);
+                if (!ram.isEmpty()) {
+                    if (specsBuilder.length() > 0) specsBuilder.append(", ");
+                    specsBuilder.append("RAM: ").append(ram);
+                }
+                if (!storage.isEmpty()) {
+                    if (specsBuilder.length() > 0) specsBuilder.append(", ");
+                    specsBuilder.append("Storage: ").append(storage);
+                }
+                if (!gpu.isEmpty()) {
+                    if (specsBuilder.length() > 0) specsBuilder.append(", ");
+                    specsBuilder.append("GPU: ").append(gpu);
+                }
+                if (!screen.isEmpty()) {
+                    if (specsBuilder.length() > 0) specsBuilder.append(", ");
+                    specsBuilder.append("Screen: ").append(screen);
+                }
                 
-                String specs = specsBuilder.toString().replaceAll(" \\| $", "");
+                String specs = specsBuilder.toString();
                 String imageUrl = etImageUrl.getText().toString().trim();
 
                 if (existingProduct != null) {
